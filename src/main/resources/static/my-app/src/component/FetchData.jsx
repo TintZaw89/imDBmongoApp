@@ -37,13 +37,19 @@ function FetchData() {
         var ddlData = selectData (selectedValue);
         var data;
         if(query === '') {query = '000000'}
+        if (selectedValue === '7')
+          {
+            const ddlvaluelist = {year: dropdownYear, genre: dropdownGenre}
+            //console.log(ddlvaluelist)
+            data = await fetchData(ddlData, ddlvaluelist);
+          }
         if (selectedValue === '6')
           {
             const ddlvaluelist = {rating: dropdownRating, genre: dropdownGenre}
             console.log(ddlvaluelist)
             data = await fetchData(ddlData, ddlvaluelist);
           }
-        else
+        if (!['6','7'].includes(selectedValue))
           {
             if(selectedValue === '5')
             {
@@ -57,7 +63,6 @@ function FetchData() {
       setData({ error: "Failed to fetch data." });// Handle error, e.g., display an error message
     }
   };
-
     const lastPostIndex = currentPage * postsPerPage;
     const fistPostIndex = lastPostIndex - postsPerPage;    
     const currentPosts = data?.slice(fistPostIndex, lastPostIndex)
@@ -70,18 +75,29 @@ function FetchData() {
 	<div className='container'>
         <div>
         Search Movie Criteria: <MyDropdown onSelectChange={handleDropdownChange} /> 
-        { selectedValue === '6' && (
-        <div>
-        Genre: <GenreList onValueChange={handleDropdownGenreChange}/> Rating: <RatingList onValueChange={handleDropdownRatingChange}/>
-        </div>
-        )}
-        {
-          selectedValue === '5' && (
+         {
+          (selectedValue === '5' || selectedValue === '7') && (
             <div>
               <YearList onValueChange={handleDropdownYearChange}/>
             </div>
           )
         }
+        { selectedValue === '6' && (
+          
+        <div>
+        <RatingList onValueChange={handleDropdownRatingChange}/>
+        </div>
+
+        )
+        }
+        {
+          (selectedValue === '6' || selectedValue === '7') && (
+            <div>
+               <GenreList onValueChange={handleDropdownGenreChange}/>
+            </div>
+          )
+        }
+       
         <MyForm onSearch={handleSearch} value={selectedValue}/>
         </div>
 		<div className='mt-3'>

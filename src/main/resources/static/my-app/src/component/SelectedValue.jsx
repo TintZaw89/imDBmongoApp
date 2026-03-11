@@ -20,4 +20,7 @@ export const selectData = (selectedValue) => {
     if(selectedValue === '6') {
         return 'getMovieByRatingAndGenre?'
     }
+    if(selectedValue === '7') {
+        return 'getMovieByYearAndGenre?'
+    }
 };

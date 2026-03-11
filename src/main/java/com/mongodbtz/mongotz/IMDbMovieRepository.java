@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.repository.Update;
 
 import java.util.List;
 public interface IMDbMovieRepository extends MongoRepository<IMDbMovie,String>{
-    @Query("{ year: ?0, genre: ?1 }")
+    @Query(value = "{ year: ?0, genre: ?1 }", sort = "{ 'year' : 1}")
     List<IMDbMovie> findMovieByYearAndGenre(String year,String genre);
 
     @Query(value = "{ 'year' : ?0 }", sort = "{ 'name' : 1 }")
