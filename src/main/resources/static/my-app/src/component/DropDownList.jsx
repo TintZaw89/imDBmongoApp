@@ -15,6 +15,7 @@ const Dropdown = ({ onSelectChange }) => {
       <option value="5">Year</option>
       <option value="6">Rating&Genre</option>
       <option value="7">Year&Genre</option>
+      <option value="8">Year&Rating</option>
     </select>
     </div>
   );

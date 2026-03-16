@@ -104,10 +104,18 @@ public class IMDbMovieController {
     }
 
     @GetMapping("/getMovieByRatingAndGenre")
-    public ResponseEntity<List<IMDbMovie>> findMovieByRating(@RequestParam(required = false,value="ratingValue") String ratingValue,
+    public ResponseEntity<List<IMDbMovie>> findMovieByRatingListAndGenre(@RequestParam(required = false,value="ratingValue") String ratingValue,
                                                              @RequestParam(required = false,value="genre") String genre){
         List<IMDbMovie> imdbMovies;
         imdbMovies = imDbMovieService.findMovieByRatingListAndGenre(ratingValue,genre);
+        return ResponseEntity.ok(imdbMovies);
+    }
+
+    @GetMapping("/getMovieByYearAndRating")
+    public ResponseEntity<List<IMDbMovie>> findMovieByYearAndRatingList(@RequestParam(required = false,value="year") String year,
+                                                             @RequestParam(required = false,value="ratingValue") String ratingValue){
+        List<IMDbMovie> imdbMovies;
+        imdbMovies = imDbMovieService.findMovieByYearAndRatingList(year, ratingValue);
         return ResponseEntity.ok(imdbMovies);
     }
 

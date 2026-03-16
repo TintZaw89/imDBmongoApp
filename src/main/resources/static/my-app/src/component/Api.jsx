@@ -3,11 +3,17 @@ const host = process.env.REACT_APP_HOST;
 const BASE_URL = `http://${host}:8100/api/imdbMovie/`; // Replace with your API base URL
 const yearAndgenre = 'getMovieByYearAndGenre?';
 const ratingAndgenre = 'getMovieByRatingAndGenre?';
-const paramDDLdata = [yearAndgenre, ratingAndgenre]
+const yearAndrating = 'getMovieByYearAndRating?';
+const paramDDLdata = [yearAndgenre, ratingAndgenre, yearAndrating];
 export const fetchData = async (ddlData, query) => {
   try {
     let response;
-
+    if(ddlData === yearAndrating)
+      { 
+        const {year , rating} = query;
+        response = await fetch(`${BASE_URL}${ddlData}year=${year}&ratingValue=${rating}`);
+        console.log(response)
+      }
     if(ddlData === yearAndgenre)
       { 
         const {year , genre} = query;

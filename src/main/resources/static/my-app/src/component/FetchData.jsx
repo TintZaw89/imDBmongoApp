@@ -37,10 +37,15 @@ function FetchData() {
         var ddlData = selectData (selectedValue);
         var data;
         if(query === '') {query = '000000'}
+        if (selectedValue === '8')
+          {
+            const ddlvaluelist = {year: dropdownYear, rating: dropdownRating}
+            //console.log(ddlvaluelist)
+            data = await fetchData(ddlData, ddlvaluelist);
+          }
         if (selectedValue === '7')
           {
             const ddlvaluelist = {year: dropdownYear, genre: dropdownGenre}
-            //console.log(ddlvaluelist)
             data = await fetchData(ddlData, ddlvaluelist);
           }
         if (selectedValue === '6')
@@ -49,7 +54,7 @@ function FetchData() {
             console.log(ddlvaluelist)
             data = await fetchData(ddlData, ddlvaluelist);
           }
-        if (!['6','7'].includes(selectedValue))
+        if (!['6','7','8'].includes(selectedValue))
           {
             if(selectedValue === '5')
             {
@@ -67,6 +72,7 @@ function FetchData() {
     const fistPostIndex = lastPostIndex - postsPerPage;    
     const currentPosts = data?.slice(fistPostIndex, lastPostIndex)
     let movieSize;
+    const yearselectedValue = ['5','7','8'];
     if (!data.length === null || !data.length === "" || data.length > 1 ) 
         movieSize = "s";
 
@@ -76,13 +82,13 @@ function FetchData() {
         <div>
         Search Movie Criteria: <MyDropdown onSelectChange={handleDropdownChange} /> 
          {
-          (selectedValue === '5' || selectedValue === '7') && (
+          (yearselectedValue.includes(selectedValue)) && (
             <div>
               <YearList onValueChange={handleDropdownYearChange}/>
             </div>
           )
         }
-        { selectedValue === '6' && (
+        { (selectedValue === '6' || selectedValue === '8') && (
           
         <div>
         <RatingList onValueChange={handleDropdownRatingChange}/>

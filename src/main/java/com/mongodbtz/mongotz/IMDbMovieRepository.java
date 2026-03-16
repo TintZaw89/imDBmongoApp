@@ -6,7 +6,7 @@ import org.springframework.data.mongodb.repository.Update;
 
 import java.util.List;
 public interface IMDbMovieRepository extends MongoRepository<IMDbMovie,String>{
-    @Query(value = "{ year: ?0, genre: ?1 }", sort = "{ 'year' : 1}")
+    @Query(value = "{ year: ?0, genre: {$regex: /?1/i} }", sort = "{ 'name' : 1}")
     List<IMDbMovie> findMovieByYearAndGenre(String year,String genre);
 
     @Query(value = "{ 'year' : ?0 }", sort = "{ 'name' : 1 }")
@@ -32,4 +32,7 @@ public interface IMDbMovieRepository extends MongoRepository<IMDbMovie,String>{
 
     @Query(value = "{$and:[{ ratingValue: {$regex: /^?0\\.[0-9]$/}}, {genre: {$regex: /?1/i}}]}", sort = "{ 'ratingValue' : -1 }")
     List<IMDbMovie> findMovieByRatingAndGenre(String ratingValue,String genre);
+
+    @Query(value = "{$and:[{year: ?0},{ ratingValue: {$regex: /^?1\\.[0-9]$/}}]}", sort = "{ 'ratingValue' : -1 }")
+    List<IMDbMovie> findMovieByYearAndRating(String year,String ratingValue);
 }

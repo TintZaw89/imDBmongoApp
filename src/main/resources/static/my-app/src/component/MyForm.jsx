@@ -7,7 +7,7 @@ function MyForm({ onSearch, value }) {
     setInputValue(event.target.value);
   };
 
-  const ddlIds = ['5','6','7'];
+  const ddlIds = ['5','6','7','8'];
   const handleClick = () => {
     onSearch(inputValue); // Pass the input value to the parent or a handler
   };

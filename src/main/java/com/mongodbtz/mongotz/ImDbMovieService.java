@@ -15,8 +15,11 @@ public class ImDbMovieService {
         this.imDbMovieRepository = imDbMovieRepository;
     }
 
+    @Cacheable(value = "cache_min_1", key = "{#year, #genre}")
     public List<IMDbMovie> findMovieByYearAndGenre(String year,String genre) {
-        return imDbMovieRepository.findMovieByYearAndGenre(year,genre);
+        List<IMDbMovie> imDbMovies = imDbMovieRepository.findMovieByYearAndGenre(year,genre);
+        logger.info(imDbMovies);
+        return imDbMovies;
     }
 
     @Cacheable(value = "cache_min_1", key = "#name")
@@ -64,6 +67,13 @@ public class ImDbMovieService {
     @Cacheable(value = "cache_min_1", key = "{#ratingValue, #genre}")
     public List<IMDbMovie> findMovieByRatingListAndGenre(String ratingValue, String genre) {
         List<IMDbMovie> imDbMovies = imDbMovieRepository.findMovieByRatingAndGenre(ratingValue, genre);
+        logger.info(imDbMovies);
+        return imDbMovies;
+    }
+
+    @Cacheable(value = "cache_min_1", key = "{#year, #ratingValue}")
+    public List<IMDbMovie> findMovieByYearAndRatingList(String year, String ratingValue) {
+        List<IMDbMovie> imDbMovies = imDbMovieRepository.findMovieByYearAndRating(year, ratingValue);
         logger.info(imDbMovies);
         return imDbMovies;
     }
