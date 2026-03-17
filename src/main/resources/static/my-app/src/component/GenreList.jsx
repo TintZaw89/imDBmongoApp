@@ -30,7 +30,7 @@ const GenreList = (props) => {
         <option value="History">History</option>
         <option value="Horror">Horror</option>
         <option value="Music">Music</option>
-        <option value="Musical">Musical</option>
+        {/* <option value="Musical">Musical</option> */}
         <option value="Mystery">Mystery</option>
         <option value="News">News</option>
         <option value="Reality-TV">Reality-TV</option>

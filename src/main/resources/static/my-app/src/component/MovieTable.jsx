@@ -1,6 +1,5 @@
-//import React from "react";
 import { Link } from 'react-router-dom';
-
+//import { SortData } from './Sorting';
 const MovieTable = props =>
 {
     const { movies, page } = props;
@@ -8,10 +7,10 @@ const MovieTable = props =>
 
     return (
         <div className= "container">
-        <table className="table table-striped" >
+        <table className="table table-striped">
                     <thead>
                         <tr>
-                            <th>No</th>
+                            <td>No</td>
                             <td>Imdb ID</td>
                             <td>Movie Name</td>
                             <td>Released Year</td>
@@ -19,6 +18,7 @@ const MovieTable = props =>
                             <td>Genre</td>
                             <td>Total Rating</td>
                             <td>Rating</td>
+                            {/* <th className='p-2' onClick={() => applySorting('Rating')}>Rating {sorting.key === 'Rating' && (sorting.ascending ? '▲' : '▼')}</th> */}
                             <td>Director</td>
                             <td>Cast     </td>
                             <td>Summary</td>
@@ -46,8 +46,7 @@ const MovieTable = props =>
                                     </tr>
                                     )
                                 }
-                            )
-                        
+                            )                     
                         }
                     </tbody>
         </table>
