@@ -6,8 +6,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.data.mongodb.core.MongoTemplate;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 //@CrossOrigin(origins = "*")
 @RestController
@@ -18,8 +16,6 @@ public class IMDbMovieController {
 
     @Autowired
     private ImDbMovieService imDbMovieService; //private IMDbMovie imDbMovie;
-
-    private static final Logger logger = LogManager.getLogger(IMDbMovieController.class);
 
     public IMDbMovieController(MongoTemplate imdbTemplate) {
     }
@@ -62,8 +58,7 @@ public class IMDbMovieController {
                                                                     @RequestParam(required = false,value="genre") String genre)
     {
         List<IMDbMovie> imdbMovies;
-        imdbMovies = imDbMovieRepository.findMovieByYearAndGenre(year,genre);
-        logger.info(imdbMovies);
+        imdbMovies = imDbMovieService.findMovieByYearAndGenre(year,genre);
         return ResponseEntity.ok(imdbMovies);
     }
 

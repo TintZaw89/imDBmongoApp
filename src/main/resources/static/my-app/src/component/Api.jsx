@@ -12,19 +12,16 @@ export const fetchData = async (ddlData, query) => {
       { 
         const {year , rating} = query;
         response = await fetch(`${BASE_URL}${ddlData}year=${year}&ratingValue=${rating}`);
-        console.log(response)
       }
     if(ddlData === yearAndgenre)
       { 
         const {year , genre} = query;
         response = await fetch(`${BASE_URL}${ddlData}year=${year}&genre=${genre}`);
-        console.log(response)
       }
     if(ddlData === ratingAndgenre)
       { 
         const {rating , genre} = query;
         response = await fetch(`${BASE_URL}${ddlData}ratingValue=${rating}&genre=${genre}`);
-        console.log(response)
       }
     if (!paramDDLdata.includes(ddlData))
         {
